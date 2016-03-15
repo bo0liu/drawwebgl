@@ -2,43 +2,60 @@
  * Created by Administrator on 2016/3/15.
  */
 /// <reference path="ivank.d.ts"/>
-var draw;
-(function (draw) {
+var Draw;
+(function (Draw) {
     var DrawGL = (function () {
         function DrawGL() {
+            this.lineEnds1 = [0, 0, 0];
+            this.lineEnds2 = [0, 0, 0];
+            this.lineEnds3 = [0, 0, 0];
             this.colors = [0xff0000, 0x00ff00, 0x0000ff];
-            stage: Stage = new Stage("canvas");
-            i = 0;
+            var self_p = this;
+            var stage = new Stage("canvas");
+            var i = 0;
+            var line;
             this.sprite1 = new Sprite();
             stage.addChild(this.sprite1);
             this.sprite1.x = 0;
-            createBg(this.sprite1);
+            this.createBg(this.sprite1);
             this.lines1 = [];
             for (i = 0; i < 3; i++) {
-                line: Sprite = new Sprite();
+                line = new Sprite();
                 this.sprite1.addChild(line);
-                lines1.push(line);
+                this.lines1.push(line);
             }
             this.sprite2 = new Sprite();
             stage.addChild(this.sprite2);
             this.sprite2.x = 200;
-            createBg(this.sprite2);
+            this.createBg(this.sprite2);
             this.lines2 = [];
             for (i = 0; i < 3; i++) {
                 line = new Sprite();
-                sprite1.addChild(line);
-                lines2.push(line);
+                this.sprite2.addChild(line);
+                this.lines2.push(line);
             }
-            var sprite3 = new Sprite();
-            stage.addChild(sprite3);
-            sprite3.x = 400;
-            createBg(sprite3);
-            lines3 = [];
+            this.sprite3 = new Sprite();
+            stage.addChild(this.sprite3);
+            this.sprite3.x = 400;
+            this.createBg(this.sprite3);
+            this.lines3 = [];
             for (i = 0; i < 3; i++) {
                 line = new Sprite();
-                sprite1.addChild(line);
-                lines3.push(line);
+                this.sprite3.addChild(line);
+                this.lines3.push(line);
             }
+            var line1 = self_p.sprite1;
+            line1.graphics.lineStyle(1, 0xff0000);
+            line1.graphics.moveTo(0, 0);
+            line1.graphics.lineTo(50, 200);
+            $("#navbar-btn-add-point").click(function () {
+                //drawTenThousandPoints(self);
+                var line = self_p.sprite1;
+                line.graphics.clear();
+                line.graphics.lineStyle(1, 0xffff00);
+                line.graphics.moveTo(10, 10);
+                line.graphics.lineTo(50, 200);
+            });
         }
         DrawGL.prototype.createBg = function (sprite) {
             var startH = sprite.height;
@@ -64,6 +81,7 @@ var draw;
         };
         return DrawGL;
     })();
-    draw.DrawGL = DrawGL;
-})(draw || (draw = {}));
+    Draw.DrawGL = DrawGL;
+    Draw.draw = new Draw.DrawGL();
+})(Draw || (Draw = {}));
 //# sourceMappingURL=draw.js.map

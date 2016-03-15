@@ -8,7 +8,11 @@ function Start()
     var self = this;
     $("#navbar-btn-add-point").on("click",function()
     {
-        drawTenThousandPoints(self);
+        //drawTenThousandPoints(self);
+        var line = self.lines1[0];
+        line.graphics.lineStyle(1,0xff0000);
+        line.graphics.moveTo(0,0);
+        line.graphics.lineTo(Math.random()*100,Math.random()*100);
     })
 }
 
@@ -33,9 +37,6 @@ function createSprites()
         line.x = 0;
         line.y = 0;
         lines1.push(line);
-        line.graphics.lineStyle(1,0xff0000);
-        line.graphics.moveTo(0,0);
-        line.graphics.lineTo(Math.random()*100,Math.random()*100);
     }
 
     sprite2 = new Sprite();
